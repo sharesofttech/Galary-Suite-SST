@@ -83,4 +83,7 @@ product-gallery-slider/
 - Adding a new setting field: add it once to `PGS_Settings::get_fields()` — default, sanitize type and admin UI all follow from that single definition; `get_settings()` auto-merges it into existing saved installs.
 - The one-time `pgs_visible_thumbs_migrated` flag in `class-pgs-settings.php` is an example migration pattern for changing a default without disturbing sites that already customized that field — follow the same pattern for future default changes.
 - Frontend/admin asset versions are cache-busted with `filemtime()` instead of `PGS_VERSION`, so asset edits during development show up immediately without a version bump.
- 
+
+ ## Documentation
+
+See the [[`[docs/`](./docs](https://sharesofttech.github.io/Career-Form-Wp-Plugin/))](https://sharesofttech.github.io/Career-Form-Wp-Plugin/) folder (or open `[docs/index.html](https://sharesofttech.github.io/Career-Form-Wp-Plugin/)` in a browser) for a full walkthrough of every admin screen with screenshots.
