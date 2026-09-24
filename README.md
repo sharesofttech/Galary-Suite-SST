@@ -87,3 +87,8 @@ product-gallery-slider/
  ## Documentation
 
 See the [`docs/`](https://sharesofttech.github.io/Gallery-suite-docs/) folder (or open [`docs/index.html`](https://sharesofttech.github.io/Gallery-suite-docs/) in a browser) for a full walkthrough of every admin screen with screenshots.
+
+## Live Demo
+
+Explore the Checkout Field Customizer demo:
+[View Live Demo](https://demo.sharesoft.in/checkout-field-customizer/)
