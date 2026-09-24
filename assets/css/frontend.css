@@ -1,0 +1,2314 @@
+/* =========================================================
+   PGS - THEME INDEPENDENT WOOCOMMERCE GALLERY
+   The .pgs-controlled-gallery rules intentionally use !important
+   where WooCommerce/themes commonly write inline/flexslider styles.
+   ========================================================= */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery * {
+    box-sizing: border-box;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery {
+    position: relative !important;
+    /* width / float / clear are intentionally NOT forced here:
+       the theme (or WooCommerce core layout) decides the gallery column
+       so the gallery stays in its original place beside the summary. */
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0 !important;
+}
+
+/* -------- WooCommerce FlexSlider neutralisation -------- */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .flex-viewport {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: var(--pgs-main-height, 360px) !important;
+    max-height: var(--pgs-main-height, 360px) !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    transform: none !important;
+    left: 0 !important;
+    top: 0 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__wrapper {
+    position: relative !important;
+    display: block !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+
+    height: var(--pgs-main-height, 360px) !important;
+    min-height: var(--pgs-main-height, 360px) !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: hidden !important;
+
+    transform: none !important;
+    left: 0 !important;
+    top: 0 !important;
+}
+
+/* Hide any WooCommerce clone slides. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image.clone {
+    display: none !important;
+}
+
+/* -------- Main slides -------- */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image {
+    position: absolute !important;
+    inset: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: var(--pgs-main-height, 360px) !important;
+    min-height: var(--pgs-main-height, 360px) !important;
+    max-height: var(--pgs-main-height, 360px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    transform: none !important;
+    left: 0 !important;
+    top: 0 !important;
+    transition:
+        transform var(--pgs-slide-speed, .45s) cubic-bezier(.22, .61, .36, 1),
+        opacity .35s ease,
+        visibility 0s linear .35s !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image.pgs-active-slide {
+    position: absolute !important;
+    inset: 0 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    z-index: 2 !important;
+    transition: opacity .35s ease, visibility 0s linear 0s !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image>a,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image>img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image>a {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image img {
+    object-fit: contain !important;
+    object-position: center center !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Never let WooCommerce's inline display:none hide the current slide. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image.pgs-active-slide img,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image.pgs-active-slide a {
+    display: block !important;
+}
+
+/* -------- Thumbnail box -------- */
+/* Hide WooCommerce/FlexSlider thumbnail lists that are not managed by PGS.
+   This prevents the native 4 thumbnails from appearing together with the
+   configured PGS visible-thumbnails count. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .flex-control-thumbs.pgs-native-thumb-list-hidden {
+    display: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-list {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: var(--pgs-thumb-gap, 8px) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 12px 0 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: thin;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-list li {
+    position: relative !important;
+    display: flex !important;
+
+    flex: 0 0 var(--pgs-thumb-width, 58px) !important;
+
+    width: var(--pgs-thumb-width, 58px) !important;
+    min-width: var(--pgs-thumb-width, 58px) !important;
+    max-width: var(--pgs-thumb-width, 58px) !important;
+
+    height: var(--pgs-thumb-height, 58px) !important;
+    min-height: var(--pgs-thumb-height, 58px) !important;
+    max-height: var(--pgs-thumb-height, 58px) !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: hidden !important;
+    background: #fff !important;
+
+    /* Thumbnail border color from backend */
+    border: 1px solid var(--pgs-thumb-border, #dddddd) !important;
+
+    box-sizing: border-box !important;
+
+    cursor: pointer !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    list-style: none !important;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-list li.pgs-active-thumb {
+    border: 2px solid var(--pgs-active-thumb-border, #333333) !important;
+    box-sizing: border-box !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-list li img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    max-width: none !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    opacity: 1 !important;
+}
+
+/* -------- Thumbnail Shapes -------- */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-thumb-square .pgs-thumb-list li,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-thumb-square .pgs-thumb-list li img {
+    border-radius: 0 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-thumb-rounded .pgs-thumb-list li,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-thumb-rounded .pgs-thumb-list li img {
+    /*
+     * "Rounded" must always show a visible curve on its own, even
+     * if the separate "Border radius" field (Gallery & Main Image
+     * section) is left at its default of 0px. max() guarantees at
+     * least a 10px curve while still respecting a larger value if
+     * the user raises Border radius themselves.
+     */
+    border-radius: max(var(--pgs-border-radius, 10px), 10px) !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-thumb-circle .pgs-thumb-list li,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-thumb-circle .pgs-thumb-list li img {
+    border-radius: 50% !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-item {
+    overflow: hidden !important;
+}
+
+/* =========================================================
+   PGS - VERTICAL GALLERY LAYOUT
+   Thumbnail column LEFT / RIGHT
+   ========================================================= */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right {
+
+    display: grid !important;
+
+    /*
+     * Thumbnail column = 90px
+     * Main image = remaining available width
+     */
+    grid-template-columns: 90px minmax(0, 1fr) !important;
+
+    column-gap: 15px !important;
+
+    max-width: 100% !important;
+
+    align-items: start !important;
+}
+
+
+/* =========================================================
+   LEFT THUMBNAILS
+   ========================================================= */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left {
+
+    grid-template-columns:
+        90px minmax(0, 1fr) !important;
+}
+
+
+/* Thumbnail column */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list {
+
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+
+    width: 90px !important;
+    max-width: 90px !important;
+
+    height: var(--pgs-main-height, 360px) !important;
+    max-height: var(--pgs-main-height, 360px) !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    gap: var(--pgs-thumb-gap, 8px) !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+
+/* =========================================================
+   MAIN IMAGE - LEFT THUMBNAIL MODE
+   ========================================================= */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .flex-viewport,
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .woocommerce-product-gallery__wrapper {
+
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+
+    width: 100% !important;
+
+    height: var(--pgs-main-height, 360px) !important;
+    max-height: var(--pgs-main-height, 360px) !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* =========================================================
+   RIGHT THUMBNAILS
+   ========================================================= */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right {
+
+    grid-template-columns:
+        minmax(0, 1fr) 90px !important;
+}
+
+
+/* Main image */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .flex-viewport,
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .woocommerce-product-gallery__wrapper {
+
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+
+    width: 100% !important;
+
+    height: var(--pgs-main-height, 360px) !important;
+    max-height: var(--pgs-main-height, 360px) !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* Thumbnail column */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list {
+
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+
+    width: 90px !important;
+    max-width: 90px !important;
+
+    height: var(--pgs-main-height, 360px) !important;
+    max-height: var(--pgs-main-height, 360px) !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+
+    align-items: center !important;
+    justify-content: flex-start !important;
+
+    gap: var(--pgs-thumb-gap, 8px) !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+
+/* =========================================================
+   THUMBNAIL ITEM
+   ========================================================= */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-list li {
+
+    flex: 0 0 var(--pgs-thumb-width, 58px) !important;
+
+    width: var(--pgs-thumb-width, 58px) !important;
+    min-width: var(--pgs-thumb-width, 58px) !important;
+    max-width: var(--pgs-thumb-width, 58px) !important;
+
+    height: var(--pgs-thumb-height, 58px) !important;
+    min-height: var(--pgs-thumb-height, 58px) !important;
+    max-height: var(--pgs-thumb-height, 58px) !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    overflow: hidden !important;
+
+    background: #fff !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* Thumbnail image */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-list li img {
+
+    width: 100% !important;
+    height: 100% !important;
+
+    min-width: 100% !important;
+    min-height: 100% !important;
+
+    max-width: none !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    object-fit: contain !important;
+    object-position: center center !important;
+
+    display: block !important;
+}
+
+
+/* =========================================================
+   MAIN PRODUCT IMAGE
+   ========================================================= */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image {
+
+    width: 100% !important;
+    height: var(--pgs-main-height, 360px) !important;
+
+    min-height: var(--pgs-main-height, 360px) !important;
+    max-height: var(--pgs-main-height, 360px) !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/* Image itself */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image img {
+
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: none !important;
+    max-height: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    object-fit: contain !important;
+    object-position: center center !important;
+
+    display: block !important;
+}
+
+/* -------- Horizontal layouts -------- */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-horizontal-top,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-horizontal-bottom {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-horizontal-bottom .pgs-thumb-list {
+    order: 2 !important;
+    margin: 12px 0 0 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-horizontal-bottom .flex-control-thumbs {
+    order: 2 !important;
+}
+
+/* -------- Arrows -------- */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-custom-nav {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 50 !important;
+    pointer-events: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-arrow {
+    position: absolute !important;
+    top: 50% !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 0 !important;
+    outline: 0 !important;
+    transform: translateY(-50%) !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    color: var(--pgs-arrow-color, #333) !important;
+    background: var(--pgs-arrow-bg, #fff) !important;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .22) !important;
+    opacity: .92 !important;
+    z-index: 51 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-arrows-hidden {
+    display: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-arrow-prev {
+    left: 12px !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-arrow-next {
+    right: 12px !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-arrow-prev::before {
+    content: '\2039' !important;
+    font-size: 24px !important;
+    line-height: 1 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-arrow-next::before {
+    content: '\203A' !important;
+    font-size: 24px !important;
+    line-height: 1 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-arrow-circle .pgs-arrow {
+    border-radius: 50% !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-arrow-square .pgs-arrow {
+    border-radius: 0 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-arrow-minimal .pgs-arrow {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* -------- Dots -------- */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-dots {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 14px !important;
+    margin: 12px 0 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+    clear: both !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-dots.pgs-dots-hidden {
+    display: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-dots button {
+    display: block !important;
+    width: 8px !important;
+    height: 8px !important;
+    min-width: 8px !important;
+    min-height: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: #ccc !important;
+    cursor: pointer !important;
+    box-shadow: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-dots button.active {
+    background: #333 !important;
+    transform: scale(1.35) !important;
+}
+
+/* -------- WooCommerce zoom trigger -------- */
+/* PGS opens Fancybox when the product image is clicked, so the
+ * native WooCommerce magnifier icon is intentionally removed. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__trigger {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Professional image-click affordance */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image>a {
+    cursor: zoom-in !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image>a img {
+    cursor: zoom-in !important;
+}
+
+/* -------- Disabled / special modes -------- */
+.single-product .woocommerce-product-gallery.pgs-gallery-disabled {
+    display: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-no-thumbnails .pgs-thumb-list {
+    display: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-thumbnails-only .flex-viewport {
+    display: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-thumbnails-only .pgs-custom-nav,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-thumbnails-only .pgs-dots {
+    display: none !important;
+}
+
+/* -------- Mobile -------- */
+@media (max-width: 767px) {
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list {
+        order: 2 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: none !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        margin: 12px 0 0 !important;
+    }
+}
+
+/* =========================================================
+   PGS HOVER IMAGE ZOOM
+   ========================================================= */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image.pgs-zoom-active,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image.pgs-zoom-active>a {
+    overflow: visible !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image.pgs-zoom-active>a.pgs-zoom-source {
+    cursor: crosshair !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .woocommerce-product-gallery__image.pgs-zoom-active img {
+    transform-origin: center center !important;
+    will-change: transform !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-zoom-window {
+    position: absolute !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+    background-color: #fff !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    border: 1px solid #ddd !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, .16) !important;
+    pointer-events: none !important;
+    opacity: 0;
+    overflow: hidden !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-zoom-window-right {
+    left: calc(100% + var(--pgs-zoom-gap, 15px)) !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-zoom-window-left {
+    right: calc(100% + var(--pgs-zoom-gap, 15px)) !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-zoom-window-top {
+    bottom: calc(100% + var(--pgs-zoom-gap, 15px)) !important;
+    top: auto !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-zoom-window-bottom {
+    top: calc(100% + var(--pgs-zoom-gap, 15px)) !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-zoom-window-inside {
+    left: 0 !important;
+    top: 0 !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-zoom-lens {
+    position: absolute !important;
+    z-index: 70 !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background-repeat: no-repeat !important;
+    background-color: rgba(255, 255, 255, .15) !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .18) !important;
+    pointer-events: none !important;
+    opacity: 0;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-zoom-lens-circle {
+    border-radius: 50% !important;
+}
+
+@media (max-width: 1024px) {
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-zoom-window-right,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-zoom-window-left {
+        max-width: 45vw !important;
+    }
+}
+
+/* =========================================================
+   DESKTOP GALLERY SIZE
+   ========================================================= */
+
+@media (min-width: 1025px) {
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery {
+
+        --pgs-main-height: 315px;
+        --pgs-thumb-width: 58px;
+        --pgs-thumb-height: 58px;
+        --pgs-thumb-gap: 8px;
+
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-zoom-window,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-zoom-lens {
+        display: none !important;
+    }
+}
+
+/* =========================================================
+   PGS - FINAL GALLERY LAYOUT OVERRIDES
+   Purpose:
+   1. Remove WooCommerce duplicate/native thumbnails.
+   2. Keep only the PGS thumbnail list.
+   3. Vertical layouts match the compact reference style.
+   4. Main image is slightly shorter than the thumbnail stack.
+   5. Dots stay directly below the main image.
+   6. Existing PGS zoom/window/lens styles are preserved.
+   ========================================================= */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .flex-control-thumbs {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-list {
+    list-style: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 0 !important;
+}
+
+/* ---------- Vertical left / right ---------- */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right {
+    display: grid !important;
+    grid-template-rows: auto auto !important;
+    column-gap: 14px !important;
+    row-gap: 0 !important;
+    align-items: start !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left {
+    grid-template-columns: var(--pgs-thumb-column, 58px) minmax(0, 1fr) !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right {
+    grid-template-columns: minmax(0, 1fr) var(--pgs-thumb-column, 58px) !important;
+}
+
+/* Main gallery viewport occupies the right/left column. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .flex-viewport,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .woocommerce-product-gallery__wrapper,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .flex-viewport,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .woocommerce-product-gallery__wrapper {
+    grid-row: 1 !important;
+    height: var(--pgs-main-height, 300px) !important;
+    min-height: var(--pgs-main-height, 300px) !important;
+    max-height: var(--pgs-main-height, 300px) !important;
+    width: 100% !important;
+    overflow: hidden !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .flex-viewport,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .woocommerce-product-gallery__wrapper {
+    grid-column: 2 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .flex-viewport,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .woocommerce-product-gallery__wrapper {
+    grid-column: 1 !important;
+}
+
+/* PGS thumbnails: compact vertical stack, not a second WooCommerce list. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list {
+    grid-row: 1 !important;
+    width: var(--pgs-thumb-column, 58px) !important;
+    max-width: var(--pgs-thumb-column, 58px) !important;
+    height: auto !important;
+    max-height: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-self: center !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: var(--pgs-thumb-gap, 8px) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    scrollbar-width: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list {
+    grid-column: 1 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list {
+    grid-column: 2 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list::-webkit-scrollbar,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list::-webkit-scrollbar {
+    display: none !important;
+}
+
+/* Thumbnail card */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list li,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list li {
+    flex: 0 0 var(--pgs-thumb-height, 58px) !important;
+    width: var(--pgs-thumb-width, 58px) !important;
+    height: var(--pgs-thumb-height, 58px) !important;
+    min-width: var(--pgs-thumb-width, 58px) !important;
+    min-height: var(--pgs-thumb-height, 58px) !important;
+    max-width: var(--pgs-thumb-width, 58px) !important;
+    max-height: var(--pgs-thumb-height, 58px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: var(--pgs-border-width, 1px) solid var(--pgs-thumb-border, #e5e5e5) !important;
+    background: #fff !important;
+    overflow: hidden !important;
+    cursor: pointer !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-list li.pgs-active-thumb {
+    border: 2px solid var(--pgs-active-thumb-border, #333333) !important;
+    box-sizing: border-box !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-list li img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 100% !important;
+    min-height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    pointer-events: none !important;
+}
+
+/* ---------- Dots directly under main image ---------- */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-dots,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-dots {
+    grid-row: 2 !important;
+    width: 100% !important;
+    min-height: 16px !important;
+    margin: 9px 0 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-dots {
+    grid-column: 2 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-dots {
+    grid-column: 1 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-dots button {
+    width: 7px !important;
+    height: 7px !important;
+    min-width: 7px !important;
+    min-height: 7px !important;
+    border-radius: 50% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+/* Keep the arrows inside the main image only. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-custom-nav,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-custom-nav {
+    grid-column: 2 / 3 !important;
+    grid-row: 1 !important;
+    pointer-events: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-custom-nav {
+    grid-column: 1 / 2 !important;
+}
+
+/* ---------- Recommended compact desktop proportions ---------- */
+@media (min-width: 1025px) {
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right {
+        --pgs-main-height: 300px;
+        --pgs-thumb-width: 58px;
+        --pgs-thumb-height: 58px;
+        --pgs-thumb-gap: 8px;
+    }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 767px) {
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .flex-viewport,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .woocommerce-product-gallery__wrapper,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .flex-viewport,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .woocommerce-product-gallery__wrapper {
+        order: 1 !important;
+        width: 100% !important;
+    }
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list {
+        order: 2 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        margin: 10px 0 0 !important;
+    }
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-dots,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-dots {
+        order: 3 !important;
+        width: 100% !important;
+        margin-top: 8px !important;
+    }
+}
+
+
+/* =========================================================
+   PGS CONTROL OVERRIDES
+   Arrow background / vertical position / outside position /
+   dots position + alignment are driven by PGS_SETTINGS.
+   Keep this block LAST so it wins over theme/WooCommerce rules.
+   ========================================================= */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery {
+    --pgs-arrow-size: 36px;
+    --pgs-arrow-offset: 12px;
+    --pgs-dot-size: 8px;
+    --pgs-dot-gap: 7px;
+    --pgs-dots-offset: 12px;
+}
+
+/* Arrow size + colors: variables are authoritative. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-arrow {
+    width: var(--pgs-arrow-size) !important;
+    height: var(--pgs-arrow-size) !important;
+    min-width: var(--pgs-arrow-size) !important;
+    min-height: var(--pgs-arrow-size) !important;
+    color: var(--pgs-arrow-color, #333333) !important;
+    background: var(--pgs-arrow-bg, #ffffff) !important;
+}
+
+/* Do NOT wipe the configured arrow background in Minimal style. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-arrow-minimal .pgs-arrow {
+    box-shadow: none !important;
+}
+
+/* Arrow vertical position. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-arrow-top .pgs-arrow {
+    top: var(--pgs-arrow-offset, 12px) !important;
+    bottom: auto !important;
+    transform: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-arrow-center .pgs-arrow {
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-arrow-bottom .pgs-arrow {
+    top: auto !important;
+    bottom: var(--pgs-arrow-offset, 12px) !important;
+    transform: none !important;
+}
+
+/* Arrow horizontal position. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery[data-pgs-arrow-position="inside"] .pgs-arrow-prev {
+    left: var(--pgs-arrow-offset) !important;
+    right: auto !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery[data-pgs-arrow-position="inside"] .pgs-arrow-next {
+    right: var(--pgs-arrow-offset) !important;
+    left: auto !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery[data-pgs-arrow-position="outside"] .pgs-arrow-prev {
+    left: calc(var(--pgs-arrow-size) * -1 - var(--pgs-arrow-offset)) !important;
+    right: auto !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery[data-pgs-arrow-position="outside"] .pgs-arrow-next {
+    right: calc(var(--pgs-arrow-size) * -1 - var(--pgs-arrow-offset)) !important;
+    left: auto !important;
+}
+
+/* Dots: all values come from backend. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-dots {
+    gap: var(--pgs-dot-gap) !important;
+    min-height: var(--pgs-dot-size) !important;
+    margin-top: var(--pgs-dots-offset) !important;
+    margin-bottom: 0 !important;
+    align-items: center !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-dots button {
+    width: var(--pgs-dot-size) !important;
+    height: var(--pgs-dot-size) !important;
+    min-width: var(--pgs-dot-size) !important;
+    min-height: var(--pgs-dot-size) !important;
+    background: var(--pgs-dot-color, #cccccc) !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-dots button.active {
+    background: var(--pgs-dot-active-color, #333333) !important;
+}
+
+/* Dots alignment. */
+/* =========================================================
+ * PGS - DOTS POSITION FINAL
+ *
+ * Above image   -> pgs-dots-top
+ * Below image   -> pgs-dots-bottom
+ * Overlay top   -> pgs-dots-overlay-top
+ * Overlay bottom-> pgs-dots-overlay-bottom
+ * ========================================================= */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery {
+    position: relative !important;
+}
+
+/* ---------------------------------------------------------
+ * ABOVE IMAGE
+ * --------------------------------------------------------- */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-dots-top .pgs-dots {
+
+    position: relative !important;
+
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+
+    order: -10 !important;
+
+    width: 100% !important;
+
+    margin-top: 0 !important;
+    margin-bottom: var(--pgs-dots-offset, 12px) !important;
+
+    z-index: 60 !important;
+}
+
+
+/* ---------------------------------------------------------
+ * BELOW IMAGE
+ * --------------------------------------------------------- */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-dots-bottom .pgs-dots {
+
+    position: relative !important;
+
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+
+    order: 10 !important;
+
+    width: 100% !important;
+
+    margin-top: var(--pgs-dots-offset, 12px) !important;
+    margin-bottom: 0 !important;
+
+    z-index: 60 !important;
+}
+
+
+/* ---------------------------------------------------------
+ * OVERLAY TOP
+ * --------------------------------------------------------- */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-dots-overlay-top .pgs-dots {
+
+    position: absolute !important;
+
+    top: var(--pgs-dots-offset, 12px) !important;
+    bottom: auto !important;
+
+    left: 0 !important;
+    right: 0 !important;
+
+    width: 100% !important;
+
+    margin: 0 !important;
+
+    z-index: 999 !important;
+}
+
+
+/* ---------------------------------------------------------
+ * OVERLAY BOTTOM
+ * --------------------------------------------------------- */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-dots-overlay-bottom .pgs-dots {
+
+    position: absolute !important;
+
+    top: auto !important;
+    bottom: var(--pgs-dots-offset, 12px) !important;
+
+    left: 0 !important;
+    right: 0 !important;
+
+    width: 100% !important;
+
+    margin: 0 !important;
+
+    z-index: 999 !important;
+}
+
+/* Dots position in normal horizontal layouts. */
+/* .single-product .woocommerce-product-gallery.pgs-controlled-gallery[data-pgs-dots-position="top"] .pgs-dots {
+    order: -3 !important;
+    margin-top: 0 !important;
+    margin-bottom: var(--pgs-dots-offset) !important;
+} */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery[data-pgs-dots-position="bottom"] .pgs-dots {
+    order: 10 !important;
+    margin-top: var(--pgs-dots-offset) !important;
+    margin-bottom: 0 !important;
+}
+
+/* Overlay positions. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery[data-pgs-dots-position="overlay-top"] .pgs-dots,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery[data-pgs-dots-position="overlay-bottom"] .pgs-dots {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 55 !important;
+    margin: 0 !important;
+    pointer-events: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery[data-pgs-dots-position="overlay-top"] .pgs-dots {
+    top: var(--pgs-dots-offset) !important;
+    bottom: auto !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery[data-pgs-dots-position="overlay-bottom"] .pgs-dots {
+    bottom: var(--pgs-dots-offset) !important;
+    top: auto !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery[data-pgs-dots-position^="overlay-"] .pgs-dots button {
+    pointer-events: auto !important;
+}
+
+/* Vertical layouts: keep dots with the main-image column, but let
+   position/alignment settings control their actual placement. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-dots,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-dots {
+    width: 100% !important;
+    min-height: var(--pgs-dot-size) !important;
+    gap: var(--pgs-dot-gap) !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left[data-pgs-dots-position="top"] .pgs-dots,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right[data-pgs-dots-position="top"] .pgs-dots {
+    grid-row: 1 !important;
+    margin-top: 0 !important;
+    margin-bottom: var(--pgs-dots-offset) !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left[data-pgs-dots-position="bottom"] .pgs-dots,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right[data-pgs-dots-position="bottom"] .pgs-dots {
+    grid-row: 2 !important;
+    margin-top: var(--pgs-dots-offset) !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left[data-pgs-dots-position="overlay-top"] .pgs-dots,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right[data-pgs-dots-position="overlay-top"] .pgs-dots,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left[data-pgs-dots-position="overlay-bottom"] .pgs-dots,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right[data-pgs-dots-position="overlay-bottom"] .pgs-dots {
+    grid-row: 1 !important;
+}
+
+/* =========================================================
+ * PGS - DOTS ALIGNMENT FINAL OVERRIDE
+ * ========================================================= */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-dots {
+
+    display: flex !important;
+
+    width: 100% !important;
+
+    align-items: center !important;
+
+    gap: var(--pgs-dot-gap, 8px) !important;
+}
+
+
+/* LEFT */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-dots-left .pgs-dots {
+
+    justify-content: flex-start !important;
+}
+
+
+/* CENTER */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-dots-center .pgs-dots {
+
+    justify-content: center !important;
+}
+
+
+/* RIGHT */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-dots-right .pgs-dots {
+
+    justify-content: flex-end !important;
+}
+
+/* =========================================================
+   PGS - VISIBLE THUMBNAILS VIEWPORT
+   visible_thumbnails = number shown at one time.
+   Remaining thumbnails stay scrollable.
+   ========================================================= */
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list,
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list {
+
+    height:
+        calc((var(--pgs-thumb-height, 58px) * var(--pgs-visible-thumbnails, 4)) + (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))) !important;
+
+    max-height:
+        calc((var(--pgs-thumb-height, 58px) * var(--pgs-visible-thumbnails, 4)) + (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))) !important;
+
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list li,
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list li {
+
+    flex:
+        0 0 var(--pgs-thumb-height, 58px) !important;
+
+    height:
+        var(--pgs-thumb-height, 58px) !important;
+
+    min-height:
+        var(--pgs-thumb-height, 58px) !important;
+
+    max-height:
+        var(--pgs-thumb-height, 58px) !important;
+}
+
+/* Horizontal layouts: N thumbnails visible, remaining thumbnails scroll. */
+@media (min-width: 768px) {
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-horizontal-bottom .pgs-thumb-list,
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-horizontal-top .pgs-thumb-list {
+
+        width:
+            calc((var(--pgs-thumb-width, 58px) * var(--pgs-visible-thumbnails, 4)) + (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))) !important;
+
+        max-width: 100% !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+    }
+}
+
+/* Small screens: keep horizontal thumbnails usable and scrollable. */
+@media (max-width: 767px) {
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-list {
+
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+    }
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list,
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list {
+
+        height:
+            calc((var(--pgs-thumb-height, 58px) * var(--pgs-visible-thumbnails, 4)) + (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))) !important;
+
+        max-height:
+            calc((var(--pgs-thumb-height, 58px) * var(--pgs-visible-thumbnails, 4)) + (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))) !important;
+
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+}
+/* =========================================================
+   PGS - HIDE THUMBNAIL SCROLLBAR
+   Keep scrolling enabled, hide visible scrollbar
+   ========================================================= */
+
+/* Horizontal thumbnail layouts */
+.single-product
+.woocommerce-product-gallery.pgs-controlled-gallery
+.pgs-thumb-list {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+/* Chrome / Edge / Safari */
+.single-product
+.woocommerce-product-gallery.pgs-controlled-gallery
+.pgs-thumb-list::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* =========================================================
+   PGS FIX 1 — MOBILE HORIZONTAL THUMB VIEWPORT
+   Makes visible_thumbnails (2/3/4...) respected on mobile too,
+   same as the existing desktop (min-width:768px) rule.
+   ========================================================= */
+@media (max-width: 767px) {
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-horizontal-bottom .pgs-thumb-list,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-horizontal-top .pgs-thumb-list {
+        width: calc(
+            (var(--pgs-thumb-width, 58px) * var(--pgs-visible-thumbnails, 4)) +
+            (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))
+        ) !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+    }
+
+    /* Vertical layouts collapse to a horizontal strip on mobile —
+       keep them consistent with the same visible-count viewport. */
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list {
+        width: calc(
+            (var(--pgs-thumb-width, 58px) * var(--pgs-visible-thumbnails, 4)) +
+            (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))
+        ) !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}
+
+/* =========================================================
+   PGS FIX 2 — FANCYBOX (LIGHTBOX) THUMBNAIL BAR
+   Scoped strictly to [data-pgs-lightbox="1"], which PGS's own
+   JS sets only on PGS-created Fancybox instances. This can
+   NEVER touch a theme's own gallery/lightbox or another plugin's
+   Fancybox — zero conflict risk.
+   ========================================================= */
+
+[data-pgs-lightbox="1"].pgs-fancybox-professional {
+    --pgs-fb-thumb-size: 64px;
+    --pgs-fb-thumb-gap: 8px;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-topbar {
+    position: relative !important;
+    z-index: 20 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    width: 100% !important;
+    padding: 10px 56px !important;
+    box-sizing: border-box !important;
+    background: rgba(24, 24, 24, 0.55) !important;
+    flex: 0 0 auto !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-topbar-thumbs {
+    position: relative !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    margin: 0 auto !important;
+
+    /* Exactly N thumbs visible at once; rest scroll — driven by
+       the backend visible_thumbnails value via --pgs-fb-visible-thumbnails */
+    max-width: calc(
+        (var(--pgs-fb-thumb-size) * var(--pgs-fb-visible-thumbnails, 4)) +
+        (var(--pgs-fb-thumb-gap) * (var(--pgs-fb-visible-thumbnails, 4) - 1))
+    ) !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-topbar-thumbs::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-topbar-track {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: var(--pgs-fb-thumb-gap) !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-top-thumb {
+    flex: 0 0 var(--pgs-fb-thumb-size) !important;
+    width: var(--pgs-fb-thumb-size) !important;
+    height: var(--pgs-fb-thumb-size) !important;
+    min-width: var(--pgs-fb-thumb-size) !important;
+    min-height: var(--pgs-fb-thumb-size) !important;
+    max-width: var(--pgs-fb-thumb-size) !important;
+    max-height: var(--pgs-fb-thumb-size) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 2px solid transparent !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    cursor: pointer !important;
+    box-sizing: border-box !important;
+    opacity: .65 !important;
+    transition: opacity .2s ease, border-color .2s ease !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-top-thumb:hover {
+    opacity: 1 !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-top-thumb.is-active {
+    opacity: 1 !important;
+    border-color: #ffffff !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-top-thumb img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    pointer-events: none !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-topbar-controls {
+    flex: 0 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-slideshow-toggle {
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    min-height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-slideshow-toggle svg {
+    width: 18px !important;
+    height: 18px !important;
+    fill: currentColor !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-slideshow-toggle .pgs-pause-icon {
+    display: none !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-slideshow-toggle.is-playing .pgs-play-icon {
+    display: none !important;
+}
+
+[data-pgs-lightbox="1"] .pgs-fancybox-slideshow-toggle.is-playing .pgs-pause-icon {
+    display: block !important;
+}
+
+@media (max-width: 767px) {
+    [data-pgs-lightbox="1"].pgs-fancybox-professional {
+        --pgs-fb-thumb-size: 48px;
+    }
+
+    [data-pgs-lightbox="1"] .pgs-fancybox-topbar {
+        padding: 8px 12px !important;
+    }
+}
+
+/* =========================================================
+   PGS - ENFORCE VISIBLE-THUMBNAILS COUNT (ALL DEVICES)
+   Reinforces the existing horizontal thumb-list width formula
+   with higher selector specificity (class repeated) so a theme
+   or cached stylesheet can never silently win the cascade and
+   show more/fewer thumbnails than the backend Desktop / Tablet
+   / Mobile "Visible thumbnails" setting configured for that
+   width. Nothing is hardcoded here — it reads the same
+   --pgs-thumb-width / --pgs-thumb-gap / --pgs-visible-thumbnails
+   custom properties the JS already sets per device.
+   ========================================================= */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-horizontal-bottom .pgs-thumb-list,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-horizontal-top .pgs-thumb-list {
+    width:
+        calc(
+            (var(--pgs-thumb-width, 58px) * var(--pgs-visible-thumbnails, 4)) +
+            (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))
+        ) !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    flex-wrap: nowrap !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list {
+    height:
+        calc(
+            (var(--pgs-thumb-height, 58px) * var(--pgs-visible-thumbnails, 4)) +
+            (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))
+        ) !important;
+    max-height:
+        calc(
+            (var(--pgs-thumb-height, 58px) * var(--pgs-visible-thumbnails, 4)) +
+            (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))
+        ) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+@media (max-width: 767px) {
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list {
+        width:
+            calc(
+                (var(--pgs-thumb-width, 58px) * var(--pgs-visible-thumbnails, 4)) +
+                (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))
+            ) !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+    }
+}
+
+/* =========================================================
+   PGS FIX 3 — THUMBNAIL ROW AUTO-FITS THE GALLERY WIDTH
+   (HORIZONTAL LAYOUTS ONLY)
+
+   Problem: the thumbnail row width above was always a fixed
+   px formula (thumb-width * visible-thumbnails + gaps). On
+   product pages where the gallery column is wider than that
+   fixed formula, the thumbnail strip stopped short and left
+   empty space next to the nav arrow instead of spanning the
+   full gallery width.
+
+   Fix: the row now always spans 100% of the gallery, and each
+   thumbnail (assigned in JS as an inline style so it also wins
+   over the older fixed-width rules above) takes an equal fluid
+   share of that width, sized off the same --pgs-thumb-gap /
+   --pgs-visible-thumbnails variables the backend already
+   controls. Exactly "Visible thumbnails" images fill the row
+   edge to edge and any remaining images keep scrolling — same
+   behaviour as before, just no dead space.
+
+   Scoped strictly to .pgs-horizontal-top / .pgs-horizontal-bottom,
+   so the vertical thumbnail column (fixed 90px) and the Fancybox
+   lightbox thumbnail bar ([data-pgs-lightbox="1"], its own rules
+   further above) are completely untouched.
+   ========================================================= */
+/* =========================================================
+   PGS - RESPONSIVE THUMBNAIL ROW (HORIZONTAL LAYOUTS)
+
+   Backend "Thumbnail width / height / gap / Visible thumbnails"
+   (set per Desktop / Tablet / Mobile) drive these variables:
+     --pgs-thumb-width, --pgs-thumb-ratio, --pgs-thumb-gap,
+     --pgs-visible-thumbnails
+
+   Rules:
+   1. The row is EXACTLY "visible thumbnails" slots wide:
+        row width = min(100% of gallery,
+                        N * thumb-width + (N - 1) * gap)
+   2. Every thumbnail is (row width - gaps) / N wide, so it is the
+      backend width when there is room, and shrinks automatically
+      (keeping the backend width:height ratio) when the gallery is
+      narrower. Never more and never fewer than N are visible; the
+      remaining images scroll.
+   3. Fewer images than N -> they are centred.
+   ========================================================= */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-horizontal-bottom .pgs-thumb-list,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-horizontal-top .pgs-thumb-list {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    gap: var(--pgs-thumb-gap, 8px) !important;
+    width: min(
+        100%,
+        calc(
+            (var(--pgs-thumb-width, 58px) * var(--pgs-visible-thumbnails, 4)) +
+            (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))
+        )
+    ) !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 0 !important;
+    list-style: none !important;
+    box-sizing: border-box !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-horizontal-bottom .pgs-thumb-list::-webkit-scrollbar,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-horizontal-top .pgs-thumb-list::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-horizontal-bottom .pgs-thumb-list li,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-horizontal-top .pgs-thumb-list li {
+    flex: 0 0 calc(
+        (100% - (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1)) - var(--pgs-thumb-reserve, 0px)) / var(--pgs-visible-thumbnails, 4)
+    ) !important;
+    width: calc(
+        (100% - (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1)) - var(--pgs-thumb-reserve, 0px)) / var(--pgs-visible-thumbnails, 4)
+    ) !important;
+    min-width: calc(
+        (100% - (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1)) - var(--pgs-thumb-reserve, 0px)) / var(--pgs-visible-thumbnails, 4)
+    ) !important;
+    max-width: calc(
+        (100% - (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1)) - var(--pgs-thumb-reserve, 0px)) / var(--pgs-visible-thumbnails, 4)
+    ) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+    box-sizing: border-box !important;
+}
+
+/* Centre when there are fewer images than visible slots
+   (auto margins stay scroll-safe, unlike justify-content:center). */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-horizontal-bottom .pgs-thumb-list li:first-child,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-horizontal-top .pgs-thumb-list li:first-child {
+    margin-left: auto !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-horizontal-bottom .pgs-thumb-list li:last-child,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-horizontal-top .pgs-thumb-list li:last-child {
+    margin-right: auto !important;
+}
+
+/* =========================================================
+   PGS - FINAL THUMBNAIL FIX (single source of truth)
+   - Horizontal layouts: box height follows width via aspect-ratio
+     (ratio = thumb_width / thumb_height, set by JS as --pgs-thumb-ratio)
+     so thumbnails auto-adjust on desktop, tablet and mobile.
+   - Image always fills the box (cover) -> no white bars.
+   - JS no longer sets inline height / object-fit on thumbnails.
+   ========================================================= */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-horizontal-top .pgs-thumb-list li,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-horizontal-bottom .pgs-thumb-list li {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: var(--pgs-thumb-ratio, 1) !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-horizontal-top .pgs-thumb-list,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-horizontal-bottom .pgs-thumb-list {
+    align-items: flex-start !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-list li {
+    position: relative !important;
+    background: transparent !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery .pgs-thumb-list li img {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+}
+
+/* =========================================================
+   PGS - VERTICAL LAYOUTS ON MOBILE
+   At <= 767px the vertical thumbnail column becomes a horizontal
+   row below the image. It must follow the exact same sizing rule
+   as the horizontal layouts (N slots, auto-shrink, centred).
+   ========================================================= */
+@media (max-width: 767px) {
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        align-items: flex-start !important;
+        gap: var(--pgs-thumb-gap, 8px) !important;
+        width: min(
+            100%,
+            calc(
+                (var(--pgs-thumb-width, 58px) * var(--pgs-visible-thumbnails, 4)) +
+                (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1))
+            )
+        ) !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        min-width: 0 !important;
+        margin: 12px auto 0 !important;
+        padding: 0 !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        justify-content: flex-start !important;
+        scrollbar-width: none !important;
+    }
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list li,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list li {
+        flex: 0 0 calc((100% - (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1)) - var(--pgs-thumb-reserve, 0px)) / var(--pgs-visible-thumbnails, 4)) !important;
+        width: calc((100% - (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1)) - var(--pgs-thumb-reserve, 0px)) / var(--pgs-visible-thumbnails, 4)) !important;
+        min-width: calc((100% - (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1)) - var(--pgs-thumb-reserve, 0px)) / var(--pgs-visible-thumbnails, 4)) !important;
+        max-width: calc((100% - (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1)) - var(--pgs-thumb-reserve, 0px)) / var(--pgs-visible-thumbnails, 4)) !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        aspect-ratio: var(--pgs-thumb-ratio, 1) !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list li:first-child,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list li:first-child {
+        margin-left: auto !important;
+    }
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-vertical-left .pgs-thumb-list li:last-child,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-vertical-right .pgs-thumb-list li:last-child {
+        margin-right: auto !important;
+    }
+}
+
+
+/* =========================================================
+   PGS - THUMBNAIL "CARD" STYLE (Settings > Thumbnail style)
+   Dark rounded bar, dimmed thumbnails, white active border and a
+   play / pause button at the right - same look as the lightbox bar.
+   Applies to horizontal layouts (and vertical layouts on mobile,
+   where they become a horizontal row). Colours come from the
+   backend via --pgs-card-bg / --pgs-card-active.
+   ========================================================= */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card {
+    --pgs-card-pad: 10px;
+    --pgs-play-size: 42px;
+}
+
+@media (max-width: 767px) {
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card {
+        --pgs-card-pad: 8px;
+        --pgs-play-size: 36px;
+    }
+}
+
+/* Row = card. Width = N thumbs + gaps + card padding/border
+   (+ play button when enabled), capped at the gallery width. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-top .pgs-thumb-list,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-bottom .pgs-thumb-list {
+    width: min(
+        100%,
+        calc(
+            (var(--pgs-thumb-width, 58px) * var(--pgs-visible-thumbnails, 4)) +
+            (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1)) +
+            (var(--pgs-card-pad) * 2) + 2px
+        )
+    ) !important;
+    padding: var(--pgs-card-pad) !important;
+    background: var(--pgs-card-bg, #dfe0e2) !important;
+    border: 1px solid rgba(255, 255, 255, .12) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 12px 38px rgba(0, 0, 0, .28) !important;
+    align-items: center !important;
+}
+
+/* With play button: add its width + one gap to the row. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-thumb-has-play.pgs-horizontal-top .pgs-thumb-list,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-thumb-has-play.pgs-horizontal-bottom .pgs-thumb-list {
+    width: min(
+        100%,
+        calc(
+            (var(--pgs-thumb-width, 58px) * var(--pgs-visible-thumbnails, 4)) +
+            (var(--pgs-thumb-gap, 8px) * (var(--pgs-visible-thumbnails, 4) - 1)) +
+            (var(--pgs-card-pad) * 2) + 2px +
+            var(--pgs-thumb-gap, 8px) + var(--pgs-play-size)
+        )
+    ) !important;
+}
+
+/* Reserve room for the play button; every thumbnail width formula
+   (CSS above + inline width set by JS) subtracts --pgs-thumb-reserve. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-thumb-has-play.pgs-horizontal-top,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-thumb-has-play.pgs-horizontal-bottom {
+    --pgs-thumb-reserve: calc(var(--pgs-thumb-gap, 8px) + var(--pgs-play-size, 42px));
+}
+
+/* The play wrapper is the last child, so centre with last-of-type li. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-top .pgs-thumb-list li:last-child,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-bottom .pgs-thumb-list li:last-child {
+    margin-right: 0 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-top .pgs-thumb-list li:last-of-type,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-bottom .pgs-thumb-list li:last-of-type {
+    margin-right: auto !important;
+}
+
+/* Thumbnails: rounded, dimmed, white border when active. */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-top .pgs-thumb-list li,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-bottom .pgs-thumb-list li {
+    border: 2px solid transparent !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    background: rgba(255, 255, 255, .07) !important;
+    opacity: .58 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    transition: opacity .18s ease, border-color .18s ease !important;
+    cursor: pointer !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-top .pgs-thumb-list li img,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-bottom .pgs-thumb-list li img {
+    border-radius: 0 !important;
+    object-fit: cover !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-top .pgs-thumb-list li:hover,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-bottom .pgs-thumb-list li:hover {
+    opacity: .9 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-top .pgs-thumb-list li.pgs-active-thumb,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-bottom .pgs-thumb-list li.pgs-active-thumb {
+    opacity: 1 !important;
+    border-color: var(--pgs-card-active, #ffffff) !important;
+}
+
+/* Play / pause button (sticky at the right of the scrolling row). */
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card .pgs-thumb-play-wrap {
+    display: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-top .pgs-thumb-play-wrap,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-horizontal-bottom .pgs-thumb-play-wrap {
+    position: sticky !important;
+    /* Pin into the card's right padding so scrolled thumbnails can
+       never peek out beside the button. */
+    right: calc(var(--pgs-card-pad) * -1) !important;
+    z-index: 3 !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    align-self: stretch !important;
+    margin: 0 calc(var(--pgs-card-pad) * -1) 0 calc(var(--pgs-thumb-gap, 8px) * -1) !important;
+    padding: 0 var(--pgs-card-pad) 0 var(--pgs-thumb-gap, 8px) !important;
+    list-style: none !important;
+    background: var(--pgs-card-bg, #121417) !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card .pgs-thumb-play {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: var(--pgs-play-size) !important;
+    height: var(--pgs-play-size) !important;
+    min-width: var(--pgs-play-size) !important;
+    min-height: var(--pgs-play-size) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid rgba(255, 255, 255, .12) !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, .08) !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+    text-transform: none !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    transition: background .18s ease !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card .pgs-thumb-play:hover,
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card .pgs-thumb-play:focus-visible {
+    background: rgba(255, 255, 255, .17) !important;
+    color: #ffffff !important;
+    outline: 0 !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card .pgs-thumb-play svg {
+    display: none !important;
+    width: 17px !important;
+    height: 17px !important;
+    fill: currentColor !important;
+    stroke: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card .pgs-thumb-play .pgs-thumb-play-icon {
+    display: block !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card .pgs-thumb-play.is-playing .pgs-thumb-play-icon {
+    display: none !important;
+}
+
+.single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card .pgs-thumb-play.is-playing .pgs-thumb-pause-icon {
+    display: block !important;
+}
+
+/* Vertical layouts on mobile: same card, as a horizontal row. */
+@media (max-width: 767px) {
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-vertical-left .pgs-thumb-list,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-vertical-right .pgs-thumb-list {
+        padding: var(--pgs-card-pad) !important;
+        background: var(--pgs-card-bg, #121417) !important;
+        border: 1px solid rgba(255, 255, 255, .12) !important;
+        border-radius: 14px !important;
+        align-items: center !important;
+    }
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-vertical-left .pgs-thumb-list li,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-vertical-right .pgs-thumb-list li {
+        border: 2px solid transparent !important;
+        border-radius: 8px !important;
+        overflow: hidden !important;
+        opacity: .58 !important;
+    }
+
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-vertical-left .pgs-thumb-list li.pgs-active-thumb,
+    .single-product .woocommerce-product-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-controlled-gallery.pgs-thumb-style-card.pgs-vertical-right .pgs-thumb-list li.pgs-active-thumb {
+        opacity: 1 !important;
+        border-color: var(--pgs-card-active, #ffffff) !important;
+    }
+}
+
+/* =========================================================
+   PGS - THEME-INDEPENDENT PRODUCT LAYOUT
+
+   IMPORTANT:
+   - Applies only on WooCommerce single-product pages.
+   - Does not style Fancybox.
+   - Does not depend on a specific theme name.
+   - Theme typography/buttons/content styling remain untouched.
+   - The product gallery and summary are the only two primary columns.
+   - Other direct children of the WooCommerce product wrapper span both
+     columns (tabs, notices, etc.) so they are never pushed into a
+     third grid column.
+   ========================================================= */
+
+/* The body class is printed by PHP before the page renders. */
+body.single-product.pgs-product-page div.product.pgs-product-layout,
+body.single-product.pgs-product-page div.product.product.type-product {
+    display: grid !important;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr) !important;
+
+    column-gap: clamp(24px, 4vw, 56px) !important;
+    row-gap: 0 !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    align-items: start !important;
+    box-sizing: border-box !important;
+}
+
+/* Gallery column. */
+body.single-product.pgs-product-page div.product.pgs-product-layout
+> .woocommerce-product-gallery.pgs-controlled-gallery,
+body.single-product.pgs-product-page div.product.product.type-product
+> .woocommerce-product-gallery.pgs-controlled-gallery {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    float: none !important;
+    clear: none !important;
+
+    flex: none !important;
+
+    align-self: start !important;
+    box-sizing: border-box !important;
+}
+
+/* Product summary column. */
+body.single-product.pgs-product-page div.product.pgs-product-layout
+> .summary.entry-summary,
+body.single-product.pgs-product-page div.product.product.type-product
+> .summary.entry-summary,
+body.single-product.pgs-product-page div.product.pgs-product-layout
+> .entry-summary,
+body.single-product.pgs-product-page div.product.product.type-product
+> .entry-summary {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    float: none !important;
+    clear: none !important;
+
+    flex: none !important;
+
+    align-self: start !important;
+    box-sizing: border-box !important;
+    overflow-wrap: anywhere !important;
+}
+
+/*
+ * Anything else directly inside the product wrapper — product tabs,
+ * notices, custom theme blocks, etc. — stays below the two main columns.
+ */
+body.single-product.pgs-product-page div.product.pgs-product-layout
+> :not(.woocommerce-product-gallery):not(.summary):not(.entry-summary),
+body.single-product.pgs-product-page div.product.product.type-product
+> :not(.woocommerce-product-gallery):not(.summary):not(.entry-summary) {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* PGS gallery itself. */
+body.single-product.pgs-product-page
+.woocommerce-product-gallery.pgs-controlled-gallery {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    float: none !important;
+    clear: none !important;
+    box-sizing: border-box !important;
+}
+
+/* Keep the internal image area inside the assigned gallery column. */
+body.single-product.pgs-product-page
+.woocommerce-product-gallery.pgs-controlled-gallery
+.woocommerce-product-gallery__wrapper,
+body.single-product.pgs-product-page
+.woocommerce-product-gallery.pgs-controlled-gallery
+.flex-viewport {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Never let theme floats/inline widths shrink these grid items. */
+body.single-product.pgs-product-page
+.woocommerce-product-gallery.pgs-controlled-gallery,
+body.single-product.pgs-product-page
+.summary.entry-summary {
+    position: relative !important;
+}
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1200px) {
+    body.single-product.pgs-product-page div.product.pgs-product-layout,
+    body.single-product.pgs-product-page div.product.product.type-product {
+        grid-template-columns:
+            minmax(0, 1.05fr)
+            minmax(0, .95fr) !important;
+    }
+}
+
+/* =========================================================
+   DESKTOP / LAPTOP
+   ========================================================= */
+
+@media (min-width: 1025px) and (max-width: 1199px) {
+    body.single-product.pgs-product-page div.product.pgs-product-layout,
+    body.single-product.pgs-product-page div.product.product.type-product {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr) !important;
+
+        column-gap: 36px !important;
+    }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    body.single-product.pgs-product-page div.product.pgs-product-layout,
+    body.single-product.pgs-product-page div.product.product.type-product {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr) !important;
+
+        column-gap: 24px !important;
+    }
+
+    body.single-product.pgs-product-page
+    .woocommerce-product-gallery.pgs-controlled-gallery,
+    body.single-product.pgs-product-page
+    .summary.entry-summary {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+    body.single-product.pgs-product-page div.product.pgs-product-layout,
+    body.single-product.pgs-product-page div.product.product.type-product {
+        display: grid !important;
+
+        grid-template-columns:
+            minmax(0, 1fr) !important;
+
+        grid-template-rows:
+            auto auto !important;
+
+        column-gap: 0 !important;
+        row-gap: 28px !important;
+
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    body.single-product.pgs-product-page div.product.pgs-product-layout
+    > .woocommerce-product-gallery.pgs-controlled-gallery,
+    body.single-product.pgs-product-page div.product.product.type-product
+    > .woocommerce-product-gallery.pgs-controlled-gallery {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+
+    body.single-product.pgs-product-page div.product.pgs-product-layout
+    > .summary.entry-summary,
+    body.single-product.pgs-product-page div.product.product.type-product
+    > .summary.entry-summary,
+    body.single-product.pgs-product-page div.product.pgs-product-layout
+    > .entry-summary,
+    body.single-product.pgs-product-page div.product.product.type-product
+    > .entry-summary {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+
+    body.single-product.pgs-product-page
+    .woocommerce-product-gallery.pgs-controlled-gallery
+    .woocommerce-product-gallery__wrapper,
+    body.single-product.pgs-product-page
+    .woocommerce-product-gallery.pgs-controlled-gallery
+    .flex-viewport {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
